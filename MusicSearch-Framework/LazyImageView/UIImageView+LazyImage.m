@@ -42,12 +42,17 @@ static void *ImageDownloadingActivity;
                                                                             
                                                                             if (error != nil)
                                                                             {
-                                                                                if ([error code] == NSURLErrorAppTransportSecurityRequiresSecureConnection)
-                                                                                {
-                                                                                    // if you get error NSURLErrorAppTransportSecurityRequiresSecureConnection (-1022),
-                                                                                    // then your Info.plist has not been properly configured to match the target server.
-                                                                                    //
-                                                                                    abort();
+                                                                                if (@available(iOS 9.0, *)) {
+                                                                                    if ([error code] == NSURLErrorAppTransportSecurityRequiresSecureConnection)
+                                                                                    {
+                                                                                        // if you get error NSURLErrorAppTransportSecurityRequiresSecureConnection (-1022),
+                                                                                        // then your Info.plist has not been properly configured to match the target server.
+                                                                                        //
+                                                                                        abort();
+                                                                                    }
+                                                                                }
+                                                                                else {
+                                                                                    // Fallback on earlier versions
                                                                                 }
                                                                             }
                                                                             
